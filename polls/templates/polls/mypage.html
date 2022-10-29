@@ -1,0 +1,794 @@
+{% load static %}
+{% load mathfilters %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+  <style type"text/css">
+  <!--
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body{
+      overflow:hidden;
+      background-color:#D5D5D5;
+      background-image:url({ %static 'images/library4.jpg' %});
+      background-size:1300px;
+      background-position:center+10px;
+      background-repeat:no-repeat;
+    }
+    .skill{
+      width:160px;
+      height:160px;
+      position:absolute;
+      
+    }
+    
+    .outer{
+      height:120px;
+      width:120px;
+      border-radius:50%;
+      padding:20px;
+      box-shadow:6px 6px 10px -1px rgba(0,0,0,0.15),
+                  -6px -6px 10px -1px rgba(255,255,255,0.7);
+      
+    }
+    .inner{
+      
+      height:120px;
+      width:120px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:inset 6px 6px 10px -1px rgba(0,0,0,0.15),
+                  inset -4px -4px 6px -1px rgba(255,255,255,0.7),
+                  -0.5px -0.5px 0px rgba(255,255,255,0.7),
+                  0.5px 0.5px 0px rgba(0,0,0,0.15),
+                  0px 12px 10px -10px rgba(0,0,0,0.05);
+    }
+    #number{
+      font-weight:600px;
+      color:#555;
+    }
+
+    svg{
+      position:absolute;
+      top:0;
+      left:0;
+    }
+
+    
+    .div1{
+      border-top:1px solid;
+    border-radius: 100%;
+    width:18.93%;
+    border:1px;
+    margin:7%;
+    height:137px;
+    background-color:;
+    float:left;
+    
+    margin-top:10px;
+    }
+    .div2{
+    border-radius: 100%;
+    border:1px solid;
+    border-color:white;
+    width:18.93%;
+    margin:7%;
+    height:135px;
+    background-color:;
+    float:left;
+    
+    margin-top:10px;
+    margin-left:2%;
+    margin-right:12%;
+    }
+    .div3{
+    border-top:1px solid;
+    width:130px;
+    border:1px solid;
+    margin:7%;
+    height:67px;
+    background-color:;
+    float:left;
+    
+    margin-top:10px;
+    margin-left:30px;
+    }
+    
+    .modal_title{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-weight: bold;
+        font-size: 20px;
+        padding-bottom:20px;
+        
+    }
+
+    .modal_title_side{
+        flex: 0 0 40px;
+        text-align: center;
+    }
+    .modal_overlay {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(1.5px);
+        -webkit-backdrop-filter: blur(1.5px);
+        z-index:1;
+    }
+
+    .modal_window {
+        background: white;
+        backdrop-filter: blur(13.5px);
+        -webkit-backdrop-filter: blur(13.5px);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        width: 900px;
+        height: 700px;
+        position: relative;
+        padding: 10px;
+        z-index:1;
+        
+    }
+    circle{
+      fill:none;
+      stroke:url(#GradientColor);
+      stroke-width:20px;
+      stroke-dasharray: 472;
+      stroke-dashoffset:472;
+    }
+
+
+
+    {% for i in gradelists %}
+    {% if forloop.last is True %}
+    
+    @keyframes anim0{      100%{        stroke-dashoffset:{% if i.13|mul:100|div:132 > 80 and i.13|mul:100|div:132 < 100 %}{{ i.13|mul:-472|div:132|add:522 }}{% elif i.13 >= 132 %}{{ 0 }}{% else %}{{ i.13|mul:-472|div:132|add:472 }}{% endif %};      }    }
+    @keyframes anim1{      100%{        stroke-dashoffset:{% if i.0|mul:100|div:15 > 80 and i.0|mul:100|div:15 < 100 %}{{ i.0|mul:-472|div:15|add:522 }}{% elif i.0 >= 15 %}{{ 0 }}{% else %}{{ i.0|mul:-472|div:15|add:472 }}{% endif %};      }    }
+    @keyframes anim2{      100%{        stroke-dashoffset:{% if i.1|mul:100|div:42 > 80 and i.1|mul:100|div:42 < 100 %}{{ i.1|mul:-472|div:42|add:522 }}{% elif i.1 >= 42 %}{{ 0 }}{% else %}{{ i.1|mul:-472|div:42|add:472 }}{% endif %};      }    }
+    @keyframes anim3{      100%{        stroke-dashoffset:{% if i.2|mul:100|div:3 > 80 and i.12|mul:100|div:3 < 100 %}{{ i.2|mul:-472|div:3|add:522 }}{% elif i.2 >= 3 %}{{ 0 }}{% else %}{{ i.2|mul:-472|div:3|add:472 }}{% endif %};     }    }
+    @keyframes anim4{      100%{        stroke-dashoffset:{% if i.3|mul:100|div:15 >= 80 and i.3|mul:100|div:15 < 100 %}{{ i.3|mul:-472|div:15|add:522 }}{% elif i.3 >= 15 %}{{ 0 }}{% else %}{{ i.3|mul:-472|div:15|add:472 }}{% endif %};      }    }
+    @keyframes anim5{      100%{        stroke-dashoffset:{% if i.12|mul:100|div:8 > 80 and i.12|mul:100|div:8 < 100 %}{{ i.12|mul:-472|div:8|add:522 }}{% elif i.12 >= 8 %}{{ 0 }}{% else %}{{ i.12|mul:-472|div:8|add:472 }}{% endif %};      }    }
+    @keyframes anim7{      100%{        stroke-dashoffset:{% if i.9|mul:100|div:2 > 80 and i.9|mul:100|div:2 < 100 %}{{ i.9|mul:-472|div:2|add:522 }}{% elif i.9 >= 2 %}{{ 0 }}{% else %}{{ i.9|mul:-472|div:2|add:472 }}{% endif %};      }    }
+    @keyframes anim8{      100%{        stroke-dashoffset:{% if i.10|mul:100|div:4 > 80 and i.10|mul:100|div:4 < 100 %}{{ i.10|mul:-472|div:4|add:522 }}{% elif i.10 >= 4 %}{{ 0 }}{% else %}{{ i.10|mul:-472|div:4|add:472 }}{% endif %};      }    }
+    @keyframes anim9{      100%{        stroke-dashoffset:{% if i.11|mul:100|div:9 > 80 and i.11|mul:100|div:9 < 100 %}{{ i.11|mul:472|div:9|sub:50 }}{% elif i.11 >= 9 %}{{ 0 }}{% else %}{{ i.11|mul:-472|div:9|add:472 }}{% endif %};      }    }
+    {% endif %}
+    {% endfor %}
+    table{
+      border-collapse: collapse;
+    }
+    .trr{
+      border-top:1px solid black; border-bottom: 1px solid black;
+    }
+    tr:nth-child(odd){background-color: white;}
+    tr:nth-child(even){background-color: #c1d7f0;}
+    td{padding:5px;}
+  -->
+  </style>
+  
+</head>
+
+        <div id="modal_add_feed_1" class="modal_overlay" style="display:flex;">
+        <div class="modal_window" align="center">
+            <div class="modal_title">
+                <div class="modal_title_side"></div>
+                <div>전공필수</div>
+                    <span id="close_modal1" class="material-icons-outlined">
+                        close
+                    </span>
+                </div>
+      <table border="1">
+          {% if gradelists %}
+          <tr class="trr">
+            <td>년도</td><td>학기</td><td>구분</td>
+              <td>학수번호</td><td>과목명</td><td>학점</td>
+          </tr>
+            {% for grd in gradelists %}
+              {% if grd.3 in checklist.0 %}
+              <tr>
+                  <td>{{grd.0}}</td><td>{{grd.1}}</td><td>{{grd.2}}</td>
+                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+            {% for i in gradelists %}
+            {% if forloop.last is True %}
+            {% for tb in timetb %}
+              {% if tb.1 >= i.14 %}
+              {{12312}}
+              {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+        {% endif %}
+      </table>
+
+            </div>
+        </div>
+        <div id="modal_add_feed_2" class="modal_overlay">
+        <div class="modal_window" align="center">
+            <div class="modal_title">
+                <div class="modal_title_side"></div>
+                <div>전공선택</div>
+                    <span id="close_modal2" class="material-icons-outlined">
+                        close
+                    </span>
+                </div>
+      <table border="1">
+          {% if gradelists %}
+          <tr><td>년도</td><td>학기</td><td>구분</td>
+              <td>학수번호</td><td>과목명</td><td>학점</td>
+          </tr>
+            {% for grd in gradelists %}
+              {% if grd.3 in checklist.1 %}
+              <tr>
+                  <td>{{grd.0}}</td><td>{{grd.1}}</td><td>{{grd.2}}</td>
+                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td>
+                </tr>    
+              {% endif %}
+            {% endfor %}
+        {% endif %}
+      </table>
+
+            </div>
+        </div>
+
+        <div id="modal_add_feed_3" class="modal_overlay">
+        <div class="modal_window" align="center">
+            <div class="modal_title">
+                <div class="modal_title_side"></div>
+                <div>KU인성</div>
+                    <span id="close_modal3" class="material-icons-outlined">
+                        close
+                    </span>
+                </div>
+      <table border="1">
+          {% if gradelists %}
+          <tr><td>년도</td><td>학기</td><td>구분</td>
+              <td>학수번호</td><td>과목명</td><td>학점</td>
+          </tr>
+            {% for grd in gradelists %}
+              {% if grd.3 in checklist.2 %}
+              <tr>
+                  <td>{{grd.0}}</td><td>{{grd.1}}</td><td>{{grd.2}}</td>
+                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td>
+                </tr>    
+              {% endif %}
+            {% endfor %}
+        {% endif %}
+      </table>
+
+            </div>
+        </div>
+        <div id="modal_add_feed_4" class="modal_overlay">
+        <div class="modal_window" align="center">
+            <div class="modal_title">
+                <div class="modal_title_side"></div>
+                <div>기초교양</div>
+                    <span id="close_modal4" class="material-icons-outlined">
+                        close
+                    </span>
+                </div>
+      <table border="1">
+          {% if gradelists %}
+          <tr><td>년도</td><td>학기</td><td>구분</td>
+              <td>학수번호</td><td>과목명</td><td>학점</td>
+          </tr>
+            {% for grd in gradelists %}
+              {% if grd.3 in checklist.3 %}
+              <tr>
+                  <td>{{grd.0}}</td><td>{{grd.1}}</td><td>{{grd.2}}</td>
+                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td>
+                </tr>    
+              {% endif %}
+            {% endfor %}
+        {% endif %}
+      </table>
+
+            </div>
+        </div>
+        <div id="modal_add_feed_5" class="modal_overlay">
+        <div class="modal_window" align="center">
+            <div class="modal_title">
+                <div class="modal_title_side"></div>
+                <div>심화교양</div>
+                    <span id="close_modal5" class="material-icons-outlined">
+                        close
+                    </span>
+                </div>
+      <table border="1">
+          {% if gradelists %}
+          <tr><td>년도</td><td>학기</td><td>구분</td>
+              <td>학수번호</td><td>과목명</td><td>학점</td>
+          </tr>
+            {% for grd in gradelists %}
+              {% if grd.3 in checklist.4 %}
+              <tr><td>{{grd.0}}</td><td>{{grd.1}}</td><td>인문언어</td><td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td></tr>
+              {% endif %}
+              {% if grd.3 in checklist.5 %}
+              <tr><td>{{grd.0}}</td><td>{{grd.1}}</td><td>사회과학</td><td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td></tr>
+              {% endif %}
+              {% if grd.3 in checklist.6 %}
+              <tr><td>{{grd.0}}</td><td>{{grd.1}}</td><td>자연과학</td><td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td></tr>
+              {% endif %}
+              {% if grd.3 in checklist.7 %}
+              <tr><td>{{grd.0}}</td><td>{{grd.1}}</td><td>예체능</td><td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td></tr>
+              {% endif %}
+              {% if grd.3 in checklist.8 %}
+              <tr><td>{{grd.0}}</td><td>{{grd.1}}</td><td>융복합</td><td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td></tr>
+              {% endif %}
+            {% endfor %}
+        {% endif %}
+        
+      </table>
+      {% for i in gradelists %}
+        {% if forloop.last is True %}
+          {% if i.12 < 8 %}
+            {% if i.4 is 0 %}언어영역이 부족합니다.{% endif %}
+            {% if i.5 is 0 %}사회과학영역이 부족합니다.{% endif %}
+            {% if i.6 is 0 %}자연과학영역이 부족합니다.{% endif %}
+            {% if i.7 is 0 %}예체능영역이 부족합니다.{% endif %}
+            {% if i.8 is 0 %}융복합영역이 부족합니다.{% endif %}
+          {% endif %}
+          
+        {% endif %}
+      {% endfor %}
+            </div>
+        </div>     
+        <div id="modal_add_feed_7" class="modal_overlay">
+        <div class="modal_window" align="center">
+            <div class="modal_title">
+                <div class="modal_title_side"></div>
+                <div>실무소양</div>
+                    <span id="close_modal7" class="material-icons-outlined">
+                        close
+                    </span>
+                </div>
+      <table border="1">
+          {% if gradelists %}
+          <tr><td>년도</td><td>학기</td><td>구분</td>
+              <td>학수번호</td><td>과목명</td><td>학점</td>
+          </tr>
+            {% for grd in gradelists %}
+              {% if grd.3 in checklist.9 %}
+              <tr>
+                  <td>{{grd.0}}</td><td>{{grd.1}}</td><td>{{grd.2}}</td>
+                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td>
+                </tr>    
+              {% endif %}
+            {% endfor %}
+        {% endif %}
+      </table>
+
+            </div>
+        </div>
+        <div id="modal_add_feed_8" class="modal_overlay">
+        <div class="modal_window" align="center">
+            <div class="modal_title">
+                <div class="modal_title_side"></div>
+                <div>직업과창의</div>
+                    <span id="close_modal8" class="material-icons-outlined">
+                        close
+                    </span>
+                </div>
+      <table border="1">
+          {% if gradelists %}
+          <tr><td>년도</td><td>학기</td><td>구분</td>
+              <td>학수번호</td><td>과목명</td><td>학점</td>
+          </tr>
+            {% for grd in gradelists %}
+              {% if grd.3 in checklist.10 %}
+              <tr>
+                  <td>{{grd.0}}</td><td>{{grd.1}}</td><td>{{grd.2}}</td>
+                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td>
+                </tr>    
+              {% endif %}
+            {% endfor %}
+        {% endif %}
+      </table>
+
+            </div>
+        </div>
+        <div id="modal_add_feed_9" class="modal_overlay">
+        <div class="modal_window" align="center">
+            <div class="modal_title">
+                <div class="modal_title_side"></div>
+                <div>자연과학</div>
+                    <span id="close_modal9" class="material-icons-outlined">
+                        close
+                    </span>
+                </div>
+      <table border="1">
+          {% if gradelists %}
+          <tr><td>년도</td><td>학기</td><td>구분</td>
+              <td>학수번호</td><td>과목명</td><td>학점</td>
+          </tr>
+            {% for grd in gradelists %}
+              {% if grd.3 in checklist.11 %}
+              <tr>
+                  <td>{{grd.0}}</td><td>{{grd.1}}</td><td>{{grd.2}}</td>
+                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td>
+                </tr>    
+              {% endif %}
+            {% endfor %}
+        {% endif %}
+      </table>
+
+            </div>
+        </div> 
+<div align="center" style="margin-top:px">
+  <div style="background-color:white;margin-top:-8px;width:1300px;height:100px;border:1px solid #333;" align="right">
+    <a href="konkuk.ac.kr"><img src="{% static 'images/konkuk.png' %}" align="left" height="100px"></a>
+    <img src="{% static 'images/stair.jpg' %}" height="90px">
+  </div>
+  <div style="background-color:white;width:1300px;height:850px;"align=>
+    <div style="float:left;background-color:;width:60%;height:99%;">
+    <font size="5" weight="bold">
+      <div style="background-color:blu;width:100%; height:20%;"align="center">
+
+        
+        {% for i in gradelists %}
+        {% if forloop.last is True %}
+        <div class="div2">
+          
+          
+          
+          </div><div class="div1" id="add_feed_0">
+          총 학점
+
+            
+          <div class="skill">
+          <div class="outer">
+            <div class="inner">
+              <div id="number">
+              {{i.13}}/132
+              </div>
+            </div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+         <defs>
+            <linearGradient id="GradientColor">
+               <stop offset="0%" stop-color="#e91e63" />
+               <stop offset="100%" stop-color="#673ab7" />
+            </linearGradient>
+         </defs>
+         <circle cx="80" cy="80" r="70" stroke-linecap="round" style="stroke:{% if i.13 >= 132 %}#B2EBF4{% endif %}; animation:anim0 2s linear forwards;"/>
+        </svg>
+        </div>
+        
+        </div><div class="div2"></div>
+      </div>
+
+      <div style="background-color:blu;width:100%; height:20%;"align="center">
+        <div class="div1" id="add_feed_1">
+          전공필수
+          <div class="skill">
+          <div class="outer">
+            <div class="inner">
+              <div id="number">
+              {{i.0}}/15
+              </div>
+            </div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+         <defs>
+            <linearGradient id="GradientColor">
+               <stop offset="0%" stop-color="#e91e63" />
+               <stop offset="100%" stop-color="#673ab7" />
+            </linearGradient>
+         </defs>
+         <circle cx="80" cy="80" r="70" stroke-linecap="round"  style="stroke:{% if i.0 >= 15 %}#B2EBF4{% endif %};animation:anim1 2s linear forwards;"/>
+        </svg>
+        </div>
+        
+        </div><div class="div1" id="add_feed_2">
+          전공선택
+          <div class="skill">
+          <div class="outer">
+            <div class="inner">
+              <div id="number">
+              {{i.1}}/42
+              </div>
+            </div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+         <defs>
+            <linearGradient id="GradientColor">
+               <stop offset="0%" stop-color="#e91e63" />
+               <stop offset="100%" stop-color="#673ab7" />
+            </linearGradient>
+         </defs>
+         <circle cx="80" cy="80" r="70" stroke-linecap="round" style="stroke:{% if i.1 >= 42 %}#B2EBF4{% endif %};animation:anim2 2s linear forwards;"/>
+        </svg>
+        </div>
+        
+        </div><div class="div1" id="add_feed_3">
+          KU인성
+          
+          <div class="skill">
+          <div class="outer">
+            <div class="inner">
+              <div id="number">
+              {{i.2}}/3
+              </div>
+            </div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+         <defs>
+            <linearGradient id="GradientColor">
+               <stop offset="0%" stop-color="#e91e63" />
+               <stop offset="100%" stop-color="#673ab7" />
+            </linearGradient>
+         </defs>
+         <circle cx="80" cy="80" r="70" stroke-linecap="round" style="stroke:{% if i.2 >= 3 %}#B2EBF4{% endif %};animation:anim3 2s linear forwards;"/>
+        </svg>
+        </div>
+        
+        </div>
+      </div>
+      <div style="background-color:blu;width:100%; height:20%;"align="center">
+        <div class="div1" id="add_feed_4">
+          기초교양
+          
+          <div class="skill">
+          <div class="outer">
+            <div class="inner">
+              <div id="number">
+              {{i.3}}/15
+              </div>
+            </div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+         <defs>
+            <linearGradient id="GradientColor">
+               <stop offset="0%" stop-color="#e91e63" />
+               <stop offset="100%" stop-color="#673ab7" />
+            </linearGradient>
+         </defs>
+        <circle cx="80" cy="80" r="70" stroke-linecap="round" style="stroke:{% if i.3 >= 15 %}#B2EBF4{% endif %};animation:anim4 2s linear forwards;"/>
+        </svg>
+        </div>
+        
+        </div>
+        <div class="div1" id="add_feed_5">
+          심화교양
+          
+          <div class="skill">
+          <div class="outer">
+            <div class="inner">
+              <div id="number">
+              {{i.12}}/8
+              </div>
+            </div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+         <defs>
+            <linearGradient id="GradientColor">
+               <stop offset="50%" stop-color="blue" />
+               <stop offset="50%" stop-color="#673ab7" />
+            </linearGradient>
+         </defs>
+         <circle cx="80" cy="80" r="70" stroke-linecap="round" style="stroke:{% if i.12 >= 8 %}#B2EBF4{% endif %};animation:anim5 2s linear forwards;"/>
+        </svg>
+        </div>
+        
+        </div>
+
+        <div class="div1" id="add_feed_7">
+          실무소양
+          
+          <div class="skill">
+          <div class="outer">
+            <div class="inner">
+              <div id="number">
+              {{i.9}}/2
+              </div>
+            </div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+         <defs>
+            <linearGradient id="GradientColor">
+               <stop offset="0%" stop-color="#e91e63" />
+               <stop offset="100%" stop-color="#673ab7" />
+            </linearGradient>
+         </defs>
+         <circle cx="80" cy="80" r="70" stroke-linecap="round" style="stroke:{% if i.9 >= 2 %}#B2EBF4{% endif %};animation:anim7 2s linear forwards;"/>
+        </svg>
+        </div>
+        
+        </div>
+        <div class="div1" id="add_feed_8">
+          직업과창의
+          
+          <div class="skill">
+          <div class="outer">
+            <div class="inner">
+              <div id="number">
+              {{i.10}}/4
+              </div>
+            </div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+         <defs>
+            <linearGradient id="GradientColor">
+               <stop offset="0%" stop-color="#e91e63" />
+               <stop offset="100%" stop-color="#673ab7" />
+            </linearGradient>
+         </defs>
+         <circle cx="80" cy="80" r="70" stroke-linecap="round" style="stroke:{% if i.10 >= 4 %}#B2EBF4{% endif %};animation:anim8 2s linear forwards;"/>
+        </svg>
+        </div>
+        
+        </div>
+        <div class="div1" id="add_feed_9">
+          자연과학
+          
+          <div class="skill">
+          <div class="outer">
+            <div class="inner">
+              <div id="number">
+              {{i.11}}/9
+              </div>
+            </div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+         <defs>
+            <linearGradient id="GradientColor">
+               <stop offset="0%" stop-color="#e91e63" />
+               <stop offset="100%" stop-color="#673ab7" />
+            </linearGradient>
+         </defs>
+         <circle cx="80" cy="80" r="70" stroke-linecap="round" style="stroke:{% if i.11 >= 9 %}#B2EBF4{% endif %};animation:anim9 2s linear forwards;"/>
+        </svg>
+        </div>
+        
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+      <div style="background-color:blu;width:100%; height:20%;"align="center">
+        <div class="div1"><br></div><div class="div1"><br></div><div class="div1"><br></div>
+      </div>
+    </div>
+    <div style="align:left; float:right;background-color:;width:39%;height:32%;border:1px solid">
+      <img src="{% static 'images/language.jpg' %}" width="20%" align="left">
+      <br><br>외국어 졸업인증 여부<br>
+      <a href="https://www.kku.ac.kr/user/boardList.do?command=view&page=1&boardId=1489&boardSeq=67060&id=wwwkr_070102000000">
+        <div style="background-color:;border:solid 1px;width:200px;height:63px;margin-top:113px;float:right;">인증 기준</div></a>
+    </div>
+    <div style="align:left; float:right;background-color:;width:39%;height:33%;border:1px solid">
+      <img src="{% static 'images/gra.png' %}" width="20%" align="left">
+      <br><br><div style="
+      border-left:solid;float:right; height:40%; width:50%; margin-top:20px">2) 졸업작품 제작<br><font size="4">   -최종심사: 9월 중<br>   -전시회: 2학기 중간고사 이전</font></div><div style="background-color:; margin-top:10px; height:50%">1)졸업작품 대체<br><font size="4">  -자격증 취득+기업실무연수<br>  자격증 취득+공모전 입상<br>  -공모전입상+기업실무연수</font></div>
+      <a href="https://cs.kku.ac.kr/?c=Notice&uid=8312">
+        <div style="background-color:;border:solid 1px;width:200px;height:61px;margin-top:6px;float:right;">공식 자료</div></a>
+    </div>
+    <div style="align:left; float:right;background-color:;width:39%;height:32%;border:1px solid">
+      <img src="{% static 'images/announce1.png' %}" width="20%" align="left">
+      <br><br>교내 공지사항<br>
+      
+    </div>
+    </font>
+  </div>
+</div>
+
+        
+<body>
+
+</body>
+<script>
+  
+      let number=document.getElementById("number1");
+      let counter=0;
+      setInterval(()=>{
+        if(counter==35){
+          clearInterval();
+        }else{
+        counter += 1;
+        number.innerHTML=counter+"%";
+        }
+      },20);
+    
+    const modal1 = document.getElementById("modal_add_feed_1");
+    const buttonAddFeed1 = document.getElementById("add_feed_1");
+    buttonAddFeed1.addEventListener("click", e => {
+        modal1.style.display = "flex";
+    });
+    const buttonCloseModal1 = document.getElementById("close_modal1");
+    buttonCloseModal1.addEventListener("click", e => {
+        modal1.style.display = "none";
+        
+    });
+
+    const modal2 = document.getElementById("modal_add_feed_2");
+    const buttonAddFeed2 = document.getElementById("add_feed_2");
+    buttonAddFeed2.addEventListener("click", e => {
+        modal2.style.display = "flex";
+    });
+    const buttonCloseModal2 = document.getElementById("close_modal2");
+    buttonCloseModal2.addEventListener("click", e => {
+        modal2.style.display = "none";
+        
+    });
+
+    const modal3 = document.getElementById("modal_add_feed_3");
+    const buttonAddFeed3 = document.getElementById("add_feed_3");
+    buttonAddFeed3.addEventListener("click", e => {
+        modal3.style.display = "flex";
+    });
+    const buttonCloseModal3 = document.getElementById("close_modal3");
+    buttonCloseModal3.addEventListener("click", e => {
+        modal3.style.display = "none";
+        
+    });
+
+    const modal4 = document.getElementById("modal_add_feed_4");
+    const buttonAddFeed4 = document.getElementById("add_feed_4");
+    buttonAddFeed4.addEventListener("click", e => {
+        modal4.style.display = "flex";
+    });
+    const buttonCloseModal4 = document.getElementById("close_modal4");
+    buttonCloseModal4.addEventListener("click", e => {
+        modal4.style.display = "none";
+        
+    });
+
+    const modal5 = document.getElementById("modal_add_feed_5");
+    const buttonAddFeed5 = document.getElementById("add_feed_5");
+    buttonAddFeed5.addEventListener("click", e => {
+        modal5.style.display = "flex";
+    });
+    const buttonCloseModal5 = document.getElementById("close_modal5");
+    buttonCloseModal5.addEventListener("click", e => {
+        modal5.style.display = "none";
+        
+    });
+
+
+    const modal7 = document.getElementById("modal_add_feed_7");
+    const buttonAddFeed7 = document.getElementById("add_feed_7");
+    buttonAddFeed7.addEventListener("click", e => {
+        modal7.style.display = "flex";
+    });
+    const buttonCloseModal7 = document.getElementById("close_modal7");
+    buttonCloseModal7.addEventListener("click", e => {
+        modal7.style.display = "none";
+        
+    });
+
+    const modal8 = document.getElementById("modal_add_feed_8");
+    const buttonAddFeed8 = document.getElementById("add_feed_8");
+    buttonAddFeed8.addEventListener("click", e => {
+        modal8.style.display = "flex";
+    });
+    const buttonCloseModal8 = document.getElementById("close_modal8");
+    buttonCloseModal8.addEventListener("click", e => {
+        modal8.style.display = "none";
+        
+    });
+
+    const modal9 = document.getElementById("modal_add_feed_9");
+    const buttonAddFeed9 = document.getElementById("add_feed_9");
+    buttonAddFeed9.addEventListener("click", e => {
+        modal9.style.display = "flex";
+    });
+    const buttonCloseModal9 = document.getElementById("close_modal9");
+    buttonCloseModal9.addEventListener("click", e => {
+        modal9.style.display = "none";
+        
+    });
+    </script>
+
+</html>

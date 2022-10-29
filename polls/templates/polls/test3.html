@@ -1,0 +1,336 @@
+{% load mathfilters %}
+{% load static %}
+<!DICTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>title</title>
+        <style type"text/css">
+          <!--
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+            body{
+              overflow:hidden;
+              background-color:#D5D5D5;
+              background-image:url({ %static 'images/library4.jpg' %});
+              background-size:1300px;
+              background-position:center+10px;
+              background-repeat:no-repeat;
+            }
+            .skill{
+              width:160px;
+              height:160px;
+              position:relative;
+              
+            }
+            .outer{
+              height:120px;
+              width:120px;
+              border-radius:50%;
+              padding:20px;
+              box-shadow:6px 6px 10px -1px rgba(0,0,0,0.15),
+                         -6px -6px 10px -1px rgba(255,255,255,0.7);
+              
+            }
+            .inner{
+              
+              height:120px;
+              width:120px;
+              border-radius:50%;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              box-shadow:inset 6px 6px 10px -1px rgba(0,0,0,0.15),
+                         inset -4px -4px 6px -1px rgba(255,255,255,0.7),
+                         -0.5px -0.5px 0px rgba(255,255,255,0.7),
+                         0.5px 0.5px 0px rgba(0,0,0,0.15),
+                         0px 12px 10px -10px rgba(0,0,0,0.05);
+            }
+            #number{
+              font-weight:600px;
+              color:#555;
+            }
+            circle{
+              fill:none;
+              stroke:url(#GradientColor);
+              stroke-width:20px;
+              stroke-dasharray: 472;
+              stroke-dashoffset:472;
+              animation:anim 2s linear forwards;
+            }
+            svg{
+              position:absolute;
+              top:0;
+              left:0;
+            }
+
+            @keyframes anim{
+              100%{
+                stroke-dashoffset:165;
+              }
+            }
+            .div1{
+              border-top:1px solid;
+              border-radius: 100%;
+              width:18.93%;
+              border:1px solid;
+              margin:7%;
+              height:150px;
+              background-color:;
+              float:left;
+              
+              margin-top:10px;
+              }
+              .div2{
+              border-radius: 100%;
+              border:1px solid;
+              border-color:white;
+              width:18.93%;
+              margin:7%;
+              height:150px;
+              background-color:;
+              float:left;
+              
+              margin-top:10px;
+              margin-left:2%;
+              margin-right:12%;
+              }
+              .div3{
+              border-top:1px solid;
+              width:130px;
+              border:1px solid;
+              margin:7%;
+              height:67px;
+              background-color:;
+              float:left;
+              
+              margin-top:10px;
+              margin-left:30px;
+
+              }
+              .modal_title{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-weight: bold;
+        font-size: 20px;
+        
+    }
+
+    .modal_title_side{
+        flex: 0 0 40px;
+        text-align: center;
+    }
+    .modal_overlay {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(1.5px);
+        -webkit-backdrop-filter: blur(1.5px);
+    }
+
+    .modal_window {
+        background: white;
+        backdrop-filter: blur(13.5px);
+        -webkit-backdrop-filter: blur(13.5px);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        width: 1500px;
+        height: 800px;
+        position: relative;
+        padding: 10px;
+        
+    }
+          -->
+          </style>
+
+    </head>
+    <body> 
+      <div id="modal_add_feed0" class="modal_overlay">
+        <div class="modal_window" align="center">
+            <div class="modal_title">
+                <div class="modal_title_side"></div>
+                <div>새 게시글</div>
+                    <span id="close_modal0" class="material-icons-outlined">
+                        close
+                    </span>
+                </div>
+            <a href="https://kis.kku.ac.kr/"><img src="{% static 'images/grade1.png' %}" style="margin-left:300px;margin-right:300px"></a>
+            <img src="{% static 'images/grade2.png' %}" height="500px">
+            <img src="{% static 'images/grade4.png' %}" height="500px">
+            </div>
+        </div>
+
+
+        <div class="skill" id="add_feed0" name="add_feed0">
+          <div class="outer">
+            <div class="inner">
+              <div id="number">
+              95%
+              </div>
+            </div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+         <defs>
+            <linearGradient id="GradientColor">
+               <stop offset="0%" stop-color="#e91e63" />
+               <stop offset="100%" stop-color="#673ab7" />
+            </linearGradient>
+         </defs>
+         <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+        </svg>
+        </div>
+
+
+
+        <table border="1">
+        <tr>
+        
+        {% if gradelists %}
+        {% with sum=3 %}
+        {% for grd in gradelists %}
+        {% if grd.3 in checklist.0 %}
+            
+                {{ sum|add:grd.5 }}
+                <td>{{ sum }}</td>
+            
+            {% endif %}
+            {% endfor %}
+        </tr>
+        {% endwith %}
+        {% endif %}
+        
+        
+        <tr>
+          {% if gradelists %}
+            {% for grd in gradelists %}
+              {% if grd.3 in checklist.1 %}
+                  <td>{{ grd }}</td>
+              {% endif %}
+            {% endfor %}
+        </tr>
+        {% endif %}
+        <tr>
+          {% if gradelists %}
+           {% for grd in gradelists %}
+             {% if grd.3 in checklist.2 %}
+                 <td>{{ grd }}</td>
+             {% endif %}
+           {% endfor %}
+          </tr>
+         {% endif %}
+        
+        {% if gradelists %}
+          {% for grd in gradelists %}
+            {% if grd.3 in checklist.3 %}
+                <td>{{ grd }}</td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+        {% endif %}
+        <tr>
+          {% if gradelists %}
+            {% for grd in gradelists %}
+              {% if grd.3 in checklist.4 %}
+                  <td>{{ grd }}</td>
+              {% endif %}
+            {% endfor %}
+        </tr>
+        {% endif %}
+        <tr>
+          {% if gradelists %}
+           {% for grd in gradelists %}
+             {% if grd.3 in checklist.5 %}
+                 <td>{{ grd }}</td>
+             {% endif %}
+           {% endfor %}
+          </tr>
+         {% endif %}
+        
+        {% if gradelists %}
+          {% for grd in gradelists %}
+            {% if grd.3 in checklist.6 %}
+                <td>{{ grd }}</td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+        {% endif %}
+        <tr>
+          {% if gradelists %}
+            {% for grd in gradelists %}
+              {% if grd.3 in checklist.7 %}
+                  <td>{{ grd }}</td>
+              {% endif %}
+            {% endfor %}
+        </tr>
+        {% endif %}
+        <tr>
+          {% if gradelists %}
+           {% for grd in gradelists %}
+             {% if grd.3 in checklist.8 %}
+                 <td>{{ grd }}</td>
+             {% endif %}
+           {% endfor %}
+          </tr>
+         {% endif %}
+        {% if gradelists %}
+        
+          {% for grd in gradelists %}
+            {% if grd.3 in checklist.9 %}
+                <td>{{ grd }}</td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+        {% endif %}
+        <tr>
+          {% if gradelists %}
+            {% for grd in gradelists %}
+              {% if grd.3 in checklist.10 %}
+                  <td>{{ grd }}</td>
+              {% endif %}
+            {% endfor %}
+        </tr>
+        {% endif %}
+        <tr>
+          {% if gradelists %}
+           {% for grd in gradelists %}
+             {% if grd.3 in checklist.11 %}
+                 <td>{{ grd }}</td>
+             {% endif %}
+           {% endfor %}
+          </tr>
+         {% endif %}
+
+    </table>
+
+    </body>
+    <script>
+      let number=document.getElementById("number");
+      let counter=0;
+      setInterval(()=>{
+        if(counter==65){
+          clearInterval();
+        }else{
+        counter += 1;
+        number.innerHTML=counter+"%";
+        }
+      },20);
+      const modal0 = document.getElementById("modal_add_feed0");
+    const buttonAddFeed0 = document.getElementById("add_feed0");
+    buttonAddFeed0.addEventListener("click", e => {
+        modal0.style.display = "flex";
+    });
+    const buttonCloseModal0 = document.getElementById("close_modal0");
+    buttonCloseModal0.addEventListener("click", e => {
+        modal0.style.display = "none";
+        document.body.style.overflowY = "visible";
+    });
+    </script>
+</html>

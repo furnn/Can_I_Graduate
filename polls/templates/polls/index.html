@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <style type"text/css">
+  <!--
+    .modal_overlay {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(1.5px);
+        -webkit-backdrop-filter: blur(1.5px);
+    }
+
+    .modal_window {
+        background: white;
+        backdrop-filter: blur(13.5px);
+        -webkit-backdrop-filter: blur(13.5px);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        width: 1500px;
+        height: 800px;
+        position: relative;
+        padding: 10px;
+        
+    }
+
+    body{
+      overflow:hidden;
+      background-color:#D5D5D5;
+      background-image:url({% static 'images/library4.jpg' %});
+      background-size:1300px;
+      background-position:center+10px;
+      background-repeat:no-repeat;
+    }
+    .div1{
+      align-items:center;
+      align-self:center;
+      background-color:red;
+      width:30px;
+    }
+    div{
+      border:px solid #333;
+      overflow:aut;
+    }
+    .modal_title{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-weight: bold;
+        font-size: 20px;
+        
+    }
+
+    .modal_title_side{
+        flex: 0 0 40px;
+        text-align: center;
+    }
+  -->
+  </style>
+  
+</head>
+
+<body>
+    <div id="modal_add_feed" class="modal_overlay">
+        <div class="modal_window" align="center">
+            <div class="modal_title">
+                <div class="modal_title_side"></div>
+                <div>새 게시글</div>
+                    <span id="close_modal" class="material-icons-outlined">
+                        close
+                    </span>
+                </div>
+            <a href="https://kis.kku.ac.kr/"><img src="{% static 'images/grade1.png' %}" style="margin-left:300px;margin-right:300px"></a>
+            <img src="{% static 'images/grade2.png' %}" height="500px">
+            <img src="{% static 'images/grade4.png' %}" height="500px">
+            </div>
+        </div>
+    
+<div style="background-color:;overflow:hidden;width:100%;height:100%;margin-top:0px">
+<div style="background-color:;border-top:4px;border-bottom:px solid #333;" align="center">
+  <div style="background-color:white;width:1300px;height:102px;border:1px solid #333;" align="right">
+    <a href="konkuk.ac.kr"><img src="{% static 'images/konkuk.png' %}" align="left" height="100px"></a>
+    <img src="{% static 'images/stair.jpg' %}" height="90px">
+  </div>
+  <div>
+    <div style="float:right; margin-right:18%">
+      <div style="background-color:red;">
+      <font size="8" style="float:right;font-weight:bold;font-style:;">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      컴퓨터공학과<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      졸업요건검사<br>
+      <br><br>
+      </font>
+      </div>
+      <textarea style="heigh:10px;resize:none;scroll:auto;" rows="6" scroll="hidden" cols="74"disabled="1">
+1) 본 사이트는 건국대학교 글로컬캠퍼스 컴퓨터공학과 재학생들을 위해 제작된 사이트입니다.
+2) 입력하신 어떤 정보도 서버에 저장되지 않습니다.
+3) 본 사이트는 비공식 사이트로 참고만 하실 뿐, 증명자료가 되지 않으며 어떠한 책임도 지지 않습니다.
+      </textarea><br>
+      <input type="checkbox" name="see" id="see">본 약관을 확인하였습니다.<br><br><br><br><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="upld" id="upld" disabled><img id="add_feed" src="{% static 'images/question.png' %}" border="1px solid"width="20px"><a href><div style="font-weight: bold;
+    margin-top:5px;
+    color: white;
+    font-size: 1.2rem;
+    border-radius: 3px;
+    border: 0;
+    background-color:green;
+    width:200px;
+    height: 3.5rem;
+    cursor: pointer;"><font style="font-size:30;font-weight:bold;">검사하기</font></div></a>
+    </div>
+  </div>
+  <div style="margin-top:720px;border-top:1px solid;background-color:white;width:1300px;height:170px">
+  </div>
+</div>
+</div>
+</body>
+
+<script>
+    const modal = document.getElementById("modal_add_feed");
+    const buttonAddFeed = document.getElementById("add_feed");
+    buttonAddFeed.addEventListener("click", e => {
+        modal.style.display = "flex";
+    });
+    const buttonCloseModal = document.getElementById("close_modal");
+    buttonCloseModal.addEventListener("click", e => {
+        modal.style.display = "none";
+        document.body.style.overflowY = "visible";
+    });
+    const buttonActivate = document.getElementById("see");
+    const upld = document.getElementById("upld");
+    buttonActivate.addEventListener("change", e => {
+        if(e.target.checked){
+            upld.disabled=false;
+            buttonActivate.disabled=true;
+        } else{
+            upld.disabled=true;
+        }
+    });
+</script>
+
+
+</html>
