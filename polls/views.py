@@ -6,6 +6,8 @@ from django.http import Http404
 from django import forms
 from django.contrib.auth import logout as loogut
 import os, csv, math
+from bs4 import BeautifulSoup
+import urllib.request as req
 
 class UploadFileForm(forms.Form):
     file=forms.FileField()
@@ -17,6 +19,7 @@ def index(request):
 
 def mypage(request):
     context={csvreading(request)}
+    
     return render(request, 'polls/mypage.html', context)
 
 def add_session(request):
@@ -34,12 +37,15 @@ def add_session(request):
 
 
 def handle_uploaded_file(f, request):
-    path=os.path.join(UPLOAD_DIR, request.session.session_key+'.csv')
+    path=os.path.join(UPLOAD_DIR + str(request.session.session_key)+'.csv')
     with open(path, 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
 
 def test1(request):
+    request.session["head"]=head()
+    request.session["body"]=body()
+    request.session["link"]=link()
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         request.session["checklist"]=MaEs2017,MaSe2017,KUinsung2017,GiGyo2017,lang2017,soct2017,scnc2017,art2017,mixed2017,actual2017,career2017,core2017
@@ -48,37 +54,45 @@ def test1(request):
         print(request.session.session_key)
         if form.is_valid():
             handle_uploaded_file(request.FILES['file'], request)
-            request.session["grade"]=csvreading(request)
-            context['gradelists']=request.session["grade"]
-            print(request.session["grade"])
-            print(request.session["checklist"])
+            grade=csvreading(request)
+            print(grade)
             with open(UPLOAD_DIR+'종합강의시간표내역(학부).CSV') as file:
                 reader=csv.reader(file, delimiter=',')
                 timetable=[]
                 for row in reader:
                     try:
                         if(row[10] == " 컴퓨터공학과, 컴퓨터공학전공, 소프트웨어전공, 컴퓨터공학과"):
+                            row[1]=int(row[1])
+                            row[9]=int(float(row[9]))
+                            if(row[1] == grade[-1][14] and row[3] == '전필'):
+                                grade[-1][15]=1
+
+                            if(row[1] == grade[-1][14] and row[3] == '전선'):
+                                grade[-1][16]=1
                             timetable.append(row)
                     except:
                         pass
-            request.session["time"]=timetable
+            nul=[]
+            request.session["nul"]=nul
+            request.session["grade"]=grade
+            context['gradelists']=request.session["grade"]
+            context['nul']=request.session['nul']
             context['timetb']=request.session["time"]
-            print(request.session["time"])
+            context['head']=request.session['head']
+            context['body']=request.session['body']
+            context['link']=request.session['link']
+            delete(request)
             return render(request, 'polls/mypage.html', context)
     else:
         form = UploadFileForm()
     return render(request, 'polls/test1.html', {'form': form})
 
-def test2(request):
-    os.remove(os.path.join(UPLOAD_DIR, request.session.session_key))
-    return render(request, 'polls/test2.html')
-
 def test3(request):
     context={csvreading(request)}
     return render(request, 'polls/test3.html', context)
     
-def logout(request):
-    loogut(request)
+def delete(request):
+    os.remove(os.path.join(UPLOAD_DIR + str(request.session.session_key) +'.csv'))
 
 def csvreading(request):
     MaEs=0
@@ -96,16 +110,14 @@ def csvreading(request):
     subSum=0
     allSum=0
     year=0
-    with open(UPLOAD_DIR+request.session.session_key+'.csv') as file:
+    with open(UPLOAD_DIR+str(request.session.session_key)+'.csv') as file:
         reader=csv.reader(file, delimiter=',')
-        
         gradelist=[]
-        
         for row in reader:
-
             try:
                 if row[0] == '학 번':
                     year=int(row[9])
+                
                 if row[4] == "총 취득학점 :":
                     print(row)
                     allSum=int(float(row[5]))
@@ -121,19 +133,14 @@ def csvreading(request):
                         GiGyo+=int(row[5])
                     elif(row[3] in lang2017):
                         lang=2
-                        
                     elif(row[3] in soct2017):
                         soct=2
-                        
                     elif(row[3] in scnc2017):
                         scnc=2
-                        
                     elif(row[3] in art2017):
                         art=2
-                        
                     elif(row[3] in mixed2017):
                         mixed=2
-                        
                     elif(row[3] in actual2017):
                         actual+=int(row[5])
                     elif(row[3] in career2017):
@@ -144,10 +151,34 @@ def csvreading(request):
                 pass
         subSum=lang+soct+scnc+art+mixed
         
-    timelist=[MaEs, MaSe, KUinsung,GiGyo,lang,soct,scnc,art,mixed,actual,career,core,subSum,allSum,year]
+    timelist=[MaEs, MaSe, KUinsung,GiGyo,lang,soct,scnc,art,mixed,actual,career,core,subSum,allSum,year,0,0]
     
     gradelist.append(timelist)
     return gradelist
+res=req.urlopen('https://www.kku.ac.kr/mbshome/mbs/wwwkr/index.do')
+
+soup=BeautifulSoup(res,'html.parser')
+
+
+def head():
+    a=[]
+    
+    for i in soup.find_all(class_="visual_stit"):
+        a.append(i.get_text().strip())
+    return a
+
+def body():
+    a=[]
+
+    for i in soup.find_all(class_="visual_txt"):
+        a.append(i.get_text().strip()[0:90]+'...')
+    return a
+
+def link():
+    a=[]
+    for i in soup.find_all(class_="visual_txt"):
+        a.append('https://www.kku.ac.kr'+i.find('a')['href'])
+    return a
 
 MaEs2017=['NDFA57519','NDFA54817','NDFA24338']
 MaSe2017=['NDDA48003','NDDA11820','NDDA14393','NDDA14465','NDDA48004','NDDA15050','NDDA50341',

@@ -1,6 +1,6 @@
 {% load static %}
 {% load mathfilters %}
-
+{% load aa %}
 <!DOCTYPE html>
 <html>
 
@@ -98,7 +98,9 @@
     margin-top:10px;
     margin-left:30px;
     }
-    
+    table{
+      text-align: center;
+    }
     .modal_title{
         display: flex;
         flex-direction: row;
@@ -169,18 +171,31 @@
     table{
       border-collapse: collapse;
     }
-    .trr{
-      border-top:1px solid black; border-bottom: 1px solid black;
+    .trr1:nth-child(2n+1){background-color:white;}
+    .trr1:nth-child(2n){background-color:rgb(224, 240, 255);}
+    .trr1{
+      border-top:1px solid ; border-bottom: 1px solid ;
     }
-    tr:nth-child(odd){background-color: white;}
-    tr:nth-child(even){background-color: #c1d7f0;}
+
+    .trr2:nth-child(2n+1){background-color:rgb(255, 242, 227);}
+    .trr2:nth-child(2n){background-color:rgb(255, 242, 227);}
+    .trr2{
+      border-top:1px solid ; border-bottom: 1px solid ;
+    }
+
+    .trr3:nth-child(2n+1){background-color:rgb(255, 214, 214);}
+    .trr3:nth-child(2n){background-color:rgb(182, 217, 250);}
+    .trr3{
+      border-top:1px solid ; border-bottom: 1px solid ;
+    }
+
     td{padding:5px;}
   -->
   </style>
   
 </head>
 
-        <div id="modal_add_feed_1" class="modal_overlay" style="display:flex;">
+        <div id="modal_add_feed_1" class="modal_overlay">
         <div class="modal_window" align="center">
             <div class="modal_title">
                 <div class="modal_title_side"></div>
@@ -191,34 +206,53 @@
                 </div>
       <table border="1">
           {% if gradelists %}
-          <tr class="trr">
+          <tr class="trr1">
             <td>년도</td><td>학기</td><td>구분</td>
               <td>학수번호</td><td>과목명</td><td>학점</td>
           </tr>
             {% for grd in gradelists %}
               {% if grd.3 in checklist.0 %}
-              <tr>
+              <tr class="trr1">
                   <td>{{grd.0}}</td><td>{{grd.1}}</td><td>{{grd.2}}</td>
-                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td>
+                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td>
                 </tr>
               {% endif %}
             {% endfor %}
             {% for i in gradelists %}
             {% if forloop.last is True %}
+            {% if i.15 == 1 %}
+            </table><br><table style="text-align:center">
+               <tr class="trr1">
+                  <td>학년</td>
+                  <td>과목명</td><td>학점</td><td>시간</td><td>담당교수</td>
+               </tr>
+            {% endif %}
+
             {% for tb in timetb %}
-              {% if tb.1 >= i.14 %}
-              {{12312}}
+              {% if tb.1 == i.14 and tb.3 == "전필" %}
+              {% app nul tb.1 as 1 %}
+              
+              {% if tb.5 == nul.0 %}
+              <tr class="trr2" style="border-top:black dotted 0.7px;border-bottom:0px">
+              {% else %}
+              <tr class="trr2" style="border-top:black solid 1.5px;border-bottom:0px">
+              {% same nul tb.5 as 1 %}
+              {% endif %}
+                <td>{{tb.1}}학년</td>
+                <td>{{tb.5}}</td><td>{{tb.9}}</td><td>{{tb.13}}</td><td>{{tb.15}}</td>
+              </tr>
               {% endif %}
             {% endfor %}
             {% endif %}
             {% endfor %}
+
         {% endif %}
       </table>
 
             </div>
         </div>
         <div id="modal_add_feed_2" class="modal_overlay">
-        <div class="modal_window" align="center">
+        <div class="modal_window" style="height:750px" align="center">
             <div class="modal_title">
                 <div class="modal_title_side"></div>
                 <div>전공선택</div>
@@ -226,19 +260,48 @@
                         close
                     </span>
                 </div>
-      <table border="1">
+                <table border="1">
           {% if gradelists %}
-          <tr><td>년도</td><td>학기</td><td>구분</td>
+          <tr class="trr1">
+            <td>년도</td><td>학기</td><td>구분</td>
               <td>학수번호</td><td>과목명</td><td>학점</td>
           </tr>
             {% for grd in gradelists %}
               {% if grd.3 in checklist.1 %}
-              <tr>
+              <tr class="trr1">
                   <td>{{grd.0}}</td><td>{{grd.1}}</td><td>{{grd.2}}</td>
-                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td>
-                </tr>    
+                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td>
+                </tr>
               {% endif %}
             {% endfor %}
+            {% for i in gradelists %}
+            {% if forloop.last is True %}
+            {% if i.16 == 1 %}
+            </table><br><table style="text-align:center">
+               <tr class="trr1">
+                  <td>학년</td>
+                  <td>과목명</td><td>학점</td><td>시간</td><td>담당교수</td>
+               </tr>
+            {% endif %}
+
+            {% for tb in timetb %}
+              {% if tb.1 == i.14 and tb.3 == "전선" %}
+              {% app nul tb.1 as 1 %}
+              
+              {% if tb.5 == nul.0 %}
+              <tr class="trr2" style="border-top:black dotted 1px;border-bottom:0px">
+              {% else %}
+              <tr class="trr2" style="border-top:black solid 1.5px;border-bottom:0px">
+              {% same nul tb.5 as 1 %}
+              {% endif %}
+                <td>{{tb.1}}학년</td>
+                <td>{{tb.5}}</td><td>{{tb.9}}</td><td>{{tb.13}}</td><td>{{tb.15}}</td>
+              </tr>
+              {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+
         {% endif %}
       </table>
 
@@ -256,17 +319,18 @@
                 </div>
       <table border="1">
           {% if gradelists %}
-          <tr><td>년도</td><td>학기</td><td>구분</td>
+          <tr class="trr1"><td>년도</td><td>학기</td><td>구분</td>
               <td>학수번호</td><td>과목명</td><td>학점</td>
           </tr>
             {% for grd in gradelists %}
               {% if grd.3 in checklist.2 %}
-              <tr>
+              <tr class="trr1">
                   <td>{{grd.0}}</td><td>{{grd.1}}</td><td>{{grd.2}}</td>
-                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td>
+                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td>
                 </tr>    
               {% endif %}
             {% endfor %}
+            
         {% endif %}
       </table>
 
@@ -283,14 +347,14 @@
                 </div>
       <table border="1">
           {% if gradelists %}
-          <tr><td>년도</td><td>학기</td><td>구분</td>
+          <tr class="trr1"><td>년도</td><td>학기</td><td>구분</td>
               <td>학수번호</td><td>과목명</td><td>학점</td>
           </tr>
             {% for grd in gradelists %}
               {% if grd.3 in checklist.3 %}
-              <tr>
+              <tr class="trr1">
                   <td>{{grd.0}}</td><td>{{grd.1}}</td><td>{{grd.2}}</td>
-                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td>
+                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td>
                 </tr>    
               {% endif %}
             {% endfor %}
@@ -310,24 +374,24 @@
                 </div>
       <table border="1">
           {% if gradelists %}
-          <tr><td>년도</td><td>학기</td><td>구분</td>
+          <tr class="trr1"><td>년도</td><td>학기</td><td>구분</td>
               <td>학수번호</td><td>과목명</td><td>학점</td>
           </tr>
             {% for grd in gradelists %}
               {% if grd.3 in checklist.4 %}
-              <tr><td>{{grd.0}}</td><td>{{grd.1}}</td><td>인문언어</td><td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td></tr>
+              <tr class="trr1"><td>{{grd.0}}</td><td>{{grd.1}}</td><td>인문언어</td><td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td></tr>
               {% endif %}
               {% if grd.3 in checklist.5 %}
-              <tr><td>{{grd.0}}</td><td>{{grd.1}}</td><td>사회과학</td><td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td></tr>
+              <tr class="trr1"><td>{{grd.0}}</td><td>{{grd.1}}</td><td>사회과학</td><td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td></tr>
               {% endif %}
               {% if grd.3 in checklist.6 %}
-              <tr><td>{{grd.0}}</td><td>{{grd.1}}</td><td>자연과학</td><td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td></tr>
+              <tr class="trr1"><td>{{grd.0}}</td><td>{{grd.1}}</td><td>자연과학</td><td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td></tr>
               {% endif %}
               {% if grd.3 in checklist.7 %}
-              <tr><td>{{grd.0}}</td><td>{{grd.1}}</td><td>예체능</td><td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td></tr>
+              <tr class="trr1"><td>{{grd.0}}</td><td>{{grd.1}}</td><td>예체능</td><td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td></tr>
               {% endif %}
               {% if grd.3 in checklist.8 %}
-              <tr><td>{{grd.0}}</td><td>{{grd.1}}</td><td>융복합</td><td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td></tr>
+              <tr class="trr1"><td>{{grd.0}}</td><td>{{grd.1}}</td><td>융복합</td><td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td></tr>
               {% endif %}
             {% endfor %}
         {% endif %}
@@ -358,14 +422,14 @@
                 </div>
       <table border="1">
           {% if gradelists %}
-          <tr><td>년도</td><td>학기</td><td>구분</td>
+          <tr class="trr1"><td>년도</td><td>학기</td><td>구분</td>
               <td>학수번호</td><td>과목명</td><td>학점</td>
           </tr>
             {% for grd in gradelists %}
               {% if grd.3 in checklist.9 %}
-              <tr>
+              <tr class="trr1">
                   <td>{{grd.0}}</td><td>{{grd.1}}</td><td>{{grd.2}}</td>
-                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td>
+                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td>
                 </tr>    
               {% endif %}
             {% endfor %}
@@ -385,14 +449,14 @@
                 </div>
       <table border="1">
           {% if gradelists %}
-          <tr><td>년도</td><td>학기</td><td>구분</td>
+          <tr class="trr1"><td>년도</td><td>학기</td><td>구분</td>
               <td>학수번호</td><td>과목명</td><td>학점</td>
           </tr>
             {% for grd in gradelists %}
               {% if grd.3 in checklist.10 %}
-              <tr>
+              <tr class="trr1">
                   <td>{{grd.0}}</td><td>{{grd.1}}</td><td>{{grd.2}}</td>
-                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td>
+                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td>
                 </tr>    
               {% endif %}
             {% endfor %}
@@ -412,14 +476,14 @@
                 </div>
       <table border="1">
           {% if gradelists %}
-          <tr><td>년도</td><td>학기</td><td>구분</td>
+          <tr class="trr1"><td>년도</td><td>학기</td><td>구분</td>
               <td>학수번호</td><td>과목명</td><td>학점</td>
           </tr>
             {% for grd in gradelists %}
               {% if grd.3 in checklist.11 %}
-              <tr>
+              <tr class="trr1">
                   <td>{{grd.0}}</td><td>{{grd.1}}</td><td>{{grd.2}}</td>
-                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td><td></td>
+                  <td>{{grd.3}}</td><td>{{grd.4}}</td><td>{{grd.5}}</td>
                 </tr>    
               {% endif %}
             {% endfor %}
@@ -671,21 +735,37 @@
     <div style="align:left; float:right;background-color:;width:39%;height:33%;border:1px solid">
       <img src="{% static 'images/gra.png' %}" width="20%" align="left">
       <br><br><div style="
-      border-left:solid;float:right; height:40%; width:50%; margin-top:20px">2) 졸업작품 제작<br><font size="4">   -최종심사: 9월 중<br>   -전시회: 2학기 중간고사 이전</font></div><div style="background-color:; margin-top:10px; height:50%">1)졸업작품 대체<br><font size="4">  -자격증 취득+기업실무연수<br>  자격증 취득+공모전 입상<br>  -공모전입상+기업실무연수</font></div>
+      border-left:solid;float:right; height:40%; width:50%; margin-top:20px">2) 졸업작품 제작<br><font size="4">   -최종심사: 9월 중<br>   -전시회: 2학기 중간고사 이전</font></div><div style="background-color:; margin-top:10px; height:50%">1)졸업작품 대체<br><font size="4">  -자격증 취득+기업실무연수<br>  -자격증 취득+공모전 입상<br>  -공모전입상+기업실무연수</font></div>
       <a href="https://cs.kku.ac.kr/?c=Notice&uid=8312">
         <div style="background-color:;border:solid 1px;width:200px;height:61px;margin-top:6px;float:right;">공식 자료</div></a>
     </div>
-    <div style="align:left; float:right;background-color:;width:39%;height:32%;border:1px solid">
-      <img src="{% static 'images/announce1.png' %}" width="20%" align="left">
-      <br><br>교내 공지사항<br>
-      
-    </div>
+    {% if link %}<a href={{link.0}}>{% endif %}<div id="dv0" style="align:left; float:right;background-color:;width:507px;height:32%;border:1px solid;display:flex;position:relative;">
+      <img src="{% static 'images/announce1.png' %}" width="80px"height="50px" align="left" style="position:absolute">
+      <div style="background-color:; margin-top:50px;width:50%; height:50%"><h4>{% if head %}{{head.0}}{% endif %}</h4></div><div style="border-left:solid;float:right; height:80%; width:60%; margin-top:30px">{% if body %}<font size="4"><br>{{body.0}}</font>{% endif %}</div>
+   </div>
+   {% if link %}<a href={{link.1}}>{% endif %}<div id="dv1" style="align:left; float:right;background-color:;width:507px;height:32%;border:1px solid;display:none;position:relative;">
+    <img src="{% static 'images/announce1.png' %}" width="80px"height="50px" align="left" style="position:absolute">
+      <div style="background-color:; margin-top:50px;width:50%; height:50%"><h4>{% if head %}{{head.1}}{% endif %}</h4></div><div style="border-left:solid;float:right; height:80%; width:60%; margin-top:30px">{% if body %}<font size="4"><br>{{body.1}}</font>{% endif %}</div>
+   </div>
+   {% if link %}<a href={{link.2}}>{% endif %}<div id="dv2" style="align:left; float:right;background-color:;width:507px;height:32%;border:1px solid;display:none;position:relative;">
+    <img src="{% static 'images/announce1.png' %}" width="80px"height="50px" align="left" style="position:absolute">
+    <div style="background-color:; margin-top:50px;width:50%; height:50%"><h4>{% if head %}{{head.2}}{% endif %}</h4></div><div style="border-left:solid;float:right; height:80%; width:60%; margin-top:30px">{% if body %}<font size="4"><br>{{body.2}}</font>{% endif %}</div>
+   </div>
+   {% if link %}<a href={{link.3}}>{% endif %}<div id="dv3" style="align:left; float:right;background-color:;width:507px;height:32%;border:1px solid;display:none;position:relative;">
+    <img src="{% static 'images/announce1.png' %}" width="80px"height="50px" align="left" style="position:absolute">
+    <div style="background-color:; margin-top:50px;width:50%; height:50%"><h4>{% if head %}{{head.3}}{% endif %}</h4></div><div style="border-left:solid;float:right; height:80%; width:60%; margin-top:30px">{% if body %}<font size="4"><br>{{body.3}}</font>{% endif %}</div>
+   </div>
+   {% if link %}<a href={{link.4}}>{% endif %}<div id="dv4" style="align:left; float:right;background-color:;width:507px;height:32%;border:1px solid;display:none;position:relative;">
+    <img src="{% static 'images/announce1.png' %}" width="80px"height="50px" align="left" style="position:absolute">
+    <div style="background-color:; margin-top:50px;width:50%; height:50%"><h4>{% if head %}{{head.4}}{% endif %}</h4></div><div style="border-left:solid;float:right; height:80%; width:60%; margin-top:30px">{% if body %}<font size="4"><br>{{body.4}}</font>{% endif %}</div>
+   </div>
+  </a>
     </font>
   </div>
 </div>
 
         
-<body>
+<body onunload="unload()">
 
 </body>
 <script>
@@ -701,6 +781,19 @@
         }
       },20);
     
+      var i=0;
+      var k=0;
+    setInterval(function(){
+      document.getElementById("dv"+i).style.display="flex";
+      k=i-1;
+      if(k<0)k=4;
+      document.getElementById("dv"+k).style.display="none";
+      
+      i=i+1;
+
+      if(i>4)i=0;
+    }, 2000);
+
     const modal1 = document.getElementById("modal_add_feed_1");
     const buttonAddFeed1 = document.getElementById("add_feed_1");
     buttonAddFeed1.addEventListener("click", e => {
