@@ -1,4 +1,4 @@
-# mysite
+# CAN I GRADUATE?
 
 ## 성적입력 페이지
 >1. 로그인 없이 사용자의 강의수강기록 EXCEL파일을 입력한다.
